@@ -50,6 +50,7 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
   // Order Placement Modal
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [placedOrderId, setPlacedOrderId] = useState('');
+  const [addToastText, setAddToastText] = useState<string | null>(null);
 
   // Calculations
   const subtotal = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
@@ -84,31 +85,31 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
   return (
     <div className="flex flex-col w-full bg-[#fbf9f6] min-h-screen">
       {/* Progress Header & Step Ribbon */}
-      <section className="w-full bg-[#f5f3f0]/70 py-4 border-b border-[#eae8e5]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <nav className="flex items-center gap-4 font-label-md text-xs uppercase tracking-wider text-[#444748]">
-            <span className="flex items-center gap-1.5 text-primary font-bold">
+      <section className="w-full bg-[#f5f3f0]/70 py-3 sm:py-4 border-b border-[#eae8e5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3">
+          <nav className="flex items-center gap-2 sm:gap-4 font-label-md text-[11px] sm:text-xs uppercase tracking-wider text-[#444748] overflow-x-auto no-scrollbar w-full sm:w-auto py-0.5">
+            <span className="flex items-center gap-1.5 text-primary font-bold shrink-0">
               <span className="w-5 h-5 rounded-full bg-primary text-white flex items-center justify-center text-[10px]">
                 01
               </span>
               Shopping Bag
             </span>
-            <span className="text-outline-variant">/</span>
-            <span className="flex items-center gap-1.5 text-[#444748] hover:text-primary transition-colors cursor-pointer">
+            <span className="text-outline-variant shrink-0">/</span>
+            <span className="flex items-center gap-1.5 text-[#444748] hover:text-primary transition-colors cursor-pointer shrink-0">
               <span className="w-5 h-5 rounded-full bg-[#eae8e5] text-on-surface-variant flex items-center justify-center text-[10px]">
                 02
               </span>
-              Shipping Information
+              Address
             </span>
-            <span className="text-outline-variant">/</span>
-            <span className="flex items-center gap-1.5 text-[#444748] hover:text-primary transition-colors cursor-pointer">
+            <span className="text-outline-variant shrink-0">/</span>
+            <span className="flex items-center gap-1.5 text-[#444748] hover:text-primary transition-colors cursor-pointer shrink-0">
               <span className="w-5 h-5 rounded-full bg-[#eae8e5] text-on-surface-variant flex items-center justify-center text-[10px]">
                 03
               </span>
               Payment
             </span>
           </nav>
-          <div className="flex items-center gap-1.5 text-[#444748] font-label-xs text-[10px] tracking-widest uppercase font-bold">
+          <div className="hidden sm:flex items-center gap-1.5 text-[#444748] font-label-xs text-[10px] tracking-widest uppercase font-bold">
             <span className="material-symbols-outlined text-secondary text-[16px]">verified</span>
             <span>Guaranteed Artisanal Quality</span>
           </div>
@@ -877,7 +878,8 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
                     type="button"
                     onClick={() => {
                       onAddToCart(item, item.sizes?.[0] || 'M');
-                      alert(`${item.name} added to your bag!`);
+                      setAddToastText(`${item.name} added to your bag!`);
+                      setTimeout(() => setAddToastText(null), 2500);
                     }}
                     className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/95 text-primary flex items-center justify-center shadow-md hover:bg-primary hover:text-white transition-colors"
                   >
@@ -902,6 +904,35 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
           </div>
         </div>
       </section>
+
+      {/* Floating Add Toast */}
+      {addToastText && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-[#1b1c1a] text-white px-4 py-2 rounded-full text-xs font-label-md shadow-xl flex items-center gap-2 animate-fade-in">
+          <span className="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+          <span>{addToastText}</span>
+        </div>
+      )}
+
+      {/* Sticky Mobile Checkout Bar (Thumb Zone) */}
+      {cart.length > 0 && !orderSuccess && (
+        <aside aria-label="Mobile Checkout Action" className="lg:hidden fixed bottom-16 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#eae8e5] p-3 px-4 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
+          <div>
+            <span className="text-[10px] text-[#444748] uppercase tracking-wider block font-bold">Total Payable</span>
+            <span className="font-headline-sm text-base font-bold text-primary">
+              ₹{total.toLocaleString()}.00
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleCompleteOrder}
+            className="flex-1 max-w-[220px] h-12 px-4 rounded-full bg-primary text-white font-label-md text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-transform shadow-md"
+          >
+            <span>Complete Order</span>
+            <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </button>
+        </aside>
+      )}
 
       {/* Order Placed Success Modal */}
       {orderSuccess && (

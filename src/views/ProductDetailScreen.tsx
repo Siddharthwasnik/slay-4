@@ -34,6 +34,7 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
   const [selectedSize, setSelectedSize] = useState('M');
   const [sizeModalOpen, setSizeModalOpen] = useState(false);
   const [addedToast, setAddedToast] = useState(false);
+  const [copyToast, setCopyToast] = useState(false);
 
   // Accordion toggles
   const [accordionOpen, setAccordionOpen] = useState<{ [key: string]: boolean }>({
@@ -89,36 +90,44 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
 
   return (
     <div className="flex flex-col w-full bg-[#fbf9f6] min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full pt-8 pb-16">
+      {/* Toast Notification */}
+      {copyToast && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-[#1b1c1a] text-white px-4 py-2 rounded-full text-xs font-label-md shadow-xl flex items-center gap-2 animate-fade-in">
+          <span className="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+          <span>Product link copied to clipboard!</span>
+        </div>
+      )}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full pt-4 sm:pt-8 pb-24 md:pb-16">
         {/* Breadcrumb Ribbon */}
-        <nav className="flex items-center gap-1 text-[#444748] font-label-md text-xs uppercase tracking-wider mb-8">
-          <button type="button" onClick={() => onNavigateScreen('home')} className="hover:text-primary transition-colors">
+        <nav className="flex items-center gap-1 text-[#444748] font-label-md text-[11px] sm:text-xs uppercase tracking-wider mb-4 sm:mb-8 overflow-x-auto no-scrollbar">
+          <button type="button" onClick={() => onNavigateScreen('home')} className="hover:text-primary transition-colors shrink-0">
             Home
           </button>
           <span className="material-symbols-outlined text-[14px]">chevron_right</span>
-          <button type="button" onClick={() => onNavigateScreen('shop-all', 'festive-edit')} className="hover:text-primary transition-colors">
+          <button type="button" onClick={() => onNavigateScreen('shop-all', 'festive-edit')} className="hover:text-primary transition-colors shrink-0">
             Festive Edit
           </button>
           <span className="material-symbols-outlined text-[14px]">chevron_right</span>
-          <button type="button" onClick={() => onNavigateScreen('shop-all', 'sets')} className="hover:text-primary transition-colors">
+          <button type="button" onClick={() => onNavigateScreen('shop-all', 'sets')} className="hover:text-primary transition-colors shrink-0">
             Sets
           </button>
           <span className="material-symbols-outlined text-[14px]">chevron_right</span>
-          <span className="text-primary font-bold">{currentItem.name.split(' ')[0]} Set</span>
+          <span className="text-primary font-bold shrink-0">{currentItem.name.split(' ')[0]} Set</span>
         </nav>
 
         {/* Main Product Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
           {/* Left Column: Multi-Angle Editorial Gallery (55% / 7 cols) */}
-          <div className="lg:col-span-7 flex flex-col-reverse md:flex-row gap-4 sticky lg:top-48">
+          <div className="lg:col-span-7 flex flex-col-reverse md:flex-row gap-3 sm:gap-4 sticky lg:top-48">
             {/* Thumbnails Column */}
-            <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible shrink-0 pb-2 md:pb-0">
+            <div className="flex md:flex-col gap-2 sm:gap-3 overflow-x-auto no-scrollbar md:overflow-visible shrink-0 pb-1 md:pb-0">
               {galleryImages.map((imgUrl, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setActiveImageIndex(idx)}
-                  className={`w-20 h-28 rounded-lg overflow-hidden bg-[#eae8e5] transition-all shrink-0 ${
+                  className={`w-16 h-22 sm:w-20 sm:h-28 rounded-lg overflow-hidden bg-[#eae8e5] transition-all shrink-0 ${
                     activeImageIndex === idx
                       ? 'ring-2 ring-primary opacity-100 shadow-sm'
                       : 'opacity-70 hover:opacity-100'
@@ -132,37 +141,42 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
             {/* Hero Stage Container */}
             <div className="relative flex-1 rounded-xl overflow-hidden bg-[#f5f3f0] shadow-[0_4px_24px_rgba(0,0,0,0.04)] aspect-[3/4] group border border-[#eae8e5]">
               {/* Floating Status Pills */}
-              <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
-                <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full font-label-xs text-[10px] tracking-widest uppercase text-primary shadow-sm font-bold">
+              <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-20 flex flex-col gap-1.5 sm:gap-2">
+                <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 bg-white/90 backdrop-blur-md rounded-full font-label-xs text-[9px] sm:text-[10px] tracking-widest uppercase text-primary shadow-sm font-bold">
                   New In
                 </span>
-                <span className="px-3 py-1 bg-primary text-white rounded-full font-label-xs text-[10px] tracking-widest uppercase shadow-sm font-bold">
+                <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 bg-primary text-white rounded-full font-label-xs text-[9px] sm:text-[10px] tracking-widest uppercase shadow-sm font-bold">
                   Handcrafted Mul
                 </span>
               </div>
 
               {/* Wishlist & Share action buttons */}
-              <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+              <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-20 flex items-center gap-2">
                 <button
                   type="button"
                   aria-label="Add to Wishlist"
                   onClick={() => onToggleWishlist(currentItem)}
-                  className={`w-10 h-10 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center shadow-sm transition-all hover:scale-105 ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center shadow-sm transition-all active:scale-95 ${
                     isWishlisted ? 'text-secondary bg-white' : 'text-on-surface hover:text-secondary'
                   }`}
                 >
-                  <span className="material-symbols-outlined text-[20px]">favorite</span>
+                  <span className="material-symbols-outlined text-[18px] sm:text-[20px]">favorite</span>
                 </button>
                 <button
                   type="button"
                   aria-label="Share Piece"
                   onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
-                    alert('Product link copied to clipboard!');
+                    if (navigator.share) {
+                      navigator.share({ title: currentItem.name, url: window.location.href }).catch(() => {});
+                    } else {
+                      navigator.clipboard.writeText(window.location.href);
+                      setCopyToast(true);
+                      setTimeout(() => setCopyToast(false), 2500);
+                    }
                   }}
-                  className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-primary shadow-sm transition-all hover:scale-105"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-on-surface hover:text-primary shadow-sm transition-all active:scale-95"
                 >
-                  <span className="material-symbols-outlined text-[20px]">share</span>
+                  <span className="material-symbols-outlined text-[18px] sm:text-[20px]">share</span>
                 </button>
               </div>
 
@@ -653,6 +667,32 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
         onClose={() => setSizeModalOpen(false)}
         selectedSize={selectedSize}
       />
+
+      {/* Sticky Mobile Bottom Purchase Bar (Thumb Zone) */}
+      <aside aria-label="Quick Add to Bag" className="lg:hidden fixed bottom-16 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#eae8e5] p-3 px-4 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-1.5">
+            <span className="font-headline-sm text-sm font-bold text-primary">
+              ₹{currentItem.price.toLocaleString()}
+            </span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#f5f3f0] text-[#444748] font-bold">
+              Size {selectedSize}
+            </span>
+          </div>
+          <span className="text-[10px] text-secondary font-medium">Free Express Delivery</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleAdd}
+          className="flex-1 max-w-[200px] h-11 px-4 rounded-full bg-primary text-white font-label-md text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-transform shadow-sm"
+        >
+          <span className="material-symbols-outlined text-[16px]">
+            {addedToast ? 'check' : 'shopping_bag'}
+          </span>
+          <span>{addedToast ? 'Added' : 'Add to Bag'}</span>
+        </button>
+      </aside>
     </div>
   );
 };

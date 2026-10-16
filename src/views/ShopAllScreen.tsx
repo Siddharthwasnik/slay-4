@@ -99,8 +99,8 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
   return (
     <div className="flex flex-col w-full bg-[#fbf9f6] min-h-screen">
       {/* Collection Breadcrumb & Editorial Header */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 pt-6 pb-8 w-full">
-        <div className="flex items-center gap-1.5 text-[#444748] font-label-md text-xs uppercase tracking-wider mb-4">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-4 sm:pt-6 pb-6 sm:pb-8 w-full">
+        <div className="flex items-center gap-1.5 text-[#444748] font-label-md text-xs uppercase tracking-wider mb-3 sm:mb-4">
           <button type="button" onClick={() => onNavigateScreen('home')} className="hover:text-primary transition-colors">
             Home
           </button>
@@ -112,26 +112,26 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
           <span className="text-primary font-bold">Shop All &amp; Co-ords</span>
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6">
+          <div className="space-y-1.5 sm:space-y-2 max-w-2xl">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#eae8e5] text-on-surface font-label-xs text-[10px] tracking-widest uppercase font-bold">
               <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
               48 Curated Designs In Stock
             </span>
-            <h1 className="font-headline-lg text-3xl lg:text-4xl text-primary tracking-tight font-serif">
+            <h1 className="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-primary tracking-tight font-serif">
               The Contemporary Ethnic Edit
             </h1>
-            <p className="font-body-md text-sm text-[#444748] leading-relaxed">
+            <p className="font-body-md text-xs sm:text-sm text-[#444748] leading-relaxed">
               Breathable silhouettes, artisanal block prints, and handcrafted festive sets tailored for sunset soirees, diwali festivities, and destination celebrations.
             </p>
           </div>
 
           {/* Quick Category Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 lg:pb-0">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 lg:pb-0">
             <button
               type="button"
               onClick={() => setSelectedCategory('all')}
-              className={`px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider transition-transform active:scale-95 ${
+              className={`px-3.5 sm:px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider whitespace-nowrap transition-transform active:scale-95 ${
                 selectedCategory === 'all' || selectedCategory === 'shop-all'
                   ? 'bg-primary text-white shadow-sm font-bold'
                   : 'bg-[#f5f3f0] text-[#444748] hover:bg-[#eae8e5] hover:text-on-surface'
@@ -142,7 +142,7 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
             <button
               type="button"
               onClick={() => setSelectedCategory('sets')}
-              className={`px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider transition-colors ${
+              className={`px-3.5 sm:px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider whitespace-nowrap transition-colors ${
                 selectedCategory === 'sets'
                   ? 'bg-primary text-white shadow-sm font-bold'
                   : 'bg-[#f5f3f0] text-[#444748] hover:bg-[#eae8e5] hover:text-on-surface'
@@ -153,7 +153,7 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
             <button
               type="button"
               onClick={() => setSelectedCategory('kurti')}
-              className={`px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider transition-colors ${
+              className={`px-3.5 sm:px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider whitespace-nowrap transition-colors ${
                 selectedCategory === 'kurti'
                   ? 'bg-primary text-white shadow-sm font-bold'
                   : 'bg-[#f5f3f0] text-[#444748] hover:bg-[#eae8e5] hover:text-on-surface'
@@ -164,7 +164,7 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
             <button
               type="button"
               onClick={() => setSelectedCategory('tops')}
-              className={`px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider transition-colors ${
+              className={`px-3.5 sm:px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider whitespace-nowrap transition-colors ${
                 selectedCategory === 'tops'
                   ? 'bg-primary text-white shadow-sm font-bold'
                   : 'bg-[#f5f3f0] text-[#444748] hover:bg-[#eae8e5] hover:text-on-surface'
@@ -175,7 +175,7 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
             <button
               type="button"
               onClick={() => setSelectedCategory('bottom')}
-              className={`px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider transition-colors ${
+              className={`px-3.5 sm:px-4 py-1.5 rounded-full font-label-md text-xs uppercase tracking-wider whitespace-nowrap transition-colors ${
                 selectedCategory === 'bottom'
                   ? 'bg-primary text-white shadow-sm font-bold'
                   : 'bg-[#f5f3f0] text-[#444748] hover:bg-[#eae8e5] hover:text-on-surface'
@@ -188,8 +188,8 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
       </section>
 
       {/* Sticky Filter Bar & Utility Tray */}
-      <section className="sticky top-44 z-30 bg-[#fbf9f6]/95 backdrop-blur-md shadow-sm border-y border-[#eae8e5]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-3 flex flex-wrap items-center justify-between gap-4">
+      <section className="sticky top-24 md:top-44 z-30 bg-[#fbf9f6]/95 backdrop-blur-md shadow-sm border-y border-[#eae8e5]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-3 sm:gap-4">
           {/* Filter Dropdown Trigger Pills */}
           <div className="flex flex-wrap items-center gap-2">
             {/* Size Dropdown */}
@@ -201,7 +201,7 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
                   setPriceDropdownOpen(false);
                   setPaletteDropdownOpen(false);
                 }}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-colors shadow-sm ${
+                className={`flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider transition-colors shadow-sm ${
                   selectedSizes.length > 0 ? 'bg-primary text-white' : 'bg-white text-on-surface hover:bg-[#eae8e5]'
                 }`}
               >
@@ -319,11 +319,13 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
 
             <button
               type="button"
-              onClick={() => alert('Filter applied: Artisanal handwoven pure mulmul & Chanderi')}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#f5f3f0] text-[#444748] hover:text-secondary font-label-xs text-[10px] uppercase tracking-wider transition-colors font-bold"
+              onClick={() => setActiveTagFestive(!activeTagFestive)}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-full font-label-xs text-[10px] uppercase tracking-wider transition-colors font-bold ${
+                activeTagFestive ? 'bg-primary text-white' : 'bg-[#f5f3f0] text-[#444748] hover:text-secondary'
+              }`}
             >
               <span className="material-symbols-outlined text-[14px]">tune</span>
-              <span>More Filters</span>
+              <span>{activeTagFestive ? 'Festive Filtered' : 'Festive Only'}</span>
             </button>
           </div>
 
@@ -348,36 +350,36 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
         </div>
 
         {/* Active Filter Tags Row */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-3 flex items-center gap-2 overflow-x-auto text-xs">
-          <span className="font-label-xs text-[10px] uppercase tracking-wider text-outline font-bold">Active:</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pb-3 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
+          <span className="font-label-xs text-[10px] uppercase tracking-wider text-outline font-bold shrink-0">Active:</span>
           {selectedSizes.length > 0 && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#eae8e5] text-on-surface font-label-xs text-[10px] font-semibold">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#eae8e5] text-on-surface font-label-xs text-[10px] font-semibold shrink-0">
               Size: {selectedSizes.join(', ')}
-              <button type="button" onClick={() => setSelectedSizes([])} className="hover:text-secondary">
+              <button type="button" onClick={() => setSelectedSizes([])} className="hover:text-secondary ml-0.5">
                 ✕
               </button>
             </span>
           )}
           {activeTagFestive && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#eae8e5] text-on-surface font-label-xs text-[10px] font-semibold">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#eae8e5] text-on-surface font-label-xs text-[10px] font-semibold shrink-0">
               Festive &amp; Casual Ready
-              <button type="button" onClick={() => setActiveTagFestive(false)} className="hover:text-secondary">
+              <button type="button" onClick={() => setActiveTagFestive(false)} className="hover:text-secondary ml-0.5">
                 ✕
               </button>
             </span>
           )}
           {selectedPriceTier && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#eae8e5] text-on-surface font-label-xs text-[10px] font-semibold">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#eae8e5] text-on-surface font-label-xs text-[10px] font-semibold shrink-0">
               Price: {selectedPriceTier}
-              <button type="button" onClick={() => setSelectedPriceTier(null)} className="hover:text-secondary">
+              <button type="button" onClick={() => setSelectedPriceTier(null)} className="hover:text-secondary ml-0.5">
                 ✕
               </button>
             </span>
           )}
           {selectedPalette && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#eae8e5] text-on-surface font-label-xs text-[10px] font-semibold">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#eae8e5] text-on-surface font-label-xs text-[10px] font-semibold shrink-0">
               Palette: {selectedPalette}
-              <button type="button" onClick={() => setSelectedPalette(null)} className="hover:text-secondary">
+              <button type="button" onClick={() => setSelectedPalette(null)} className="hover:text-secondary ml-0.5">
                 ✕
               </button>
             </span>
@@ -385,16 +387,16 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
           <button
             type="button"
             onClick={clearAllFilters}
-            className="font-label-xs text-[10px] uppercase text-secondary hover:underline tracking-wider ml-2 font-bold"
+            className="font-label-xs text-[10px] uppercase text-secondary hover:underline tracking-wider ml-1 font-bold shrink-0"
           >
             Clear All
           </button>
         </div>
       </section>
 
-      {/* 4-Column Product Merchandising Grid (8 Products matching Screen 4) */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-8 w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10">
+      {/* Responsive Product Merchandising Grid: 2 columns on mobile, 4 columns on desktop */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 sm:py-8 w-full">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 gap-y-6 sm:gap-y-10">
           {filteredProducts.slice(0, 8).map((product) => {
             const isWish = wishlistIds.includes(product.id);
             const isJustAdded = quickAddedId === product.id;
@@ -415,7 +417,7 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
                   {/* Badge */}
                   {product.badge && (
                     <span
-                      className={`absolute top-3 left-3 px-2.5 py-1 rounded-full font-label-xs text-[9px] uppercase tracking-widest font-bold shadow-sm ${
+                      className={`absolute top-2 sm:top-3 left-2 sm:left-3 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full font-label-xs text-[8px] sm:text-[9px] uppercase tracking-wider font-bold shadow-sm ${
                         product.badge.includes('Off')
                           ? 'bg-secondary text-white'
                           : 'bg-white/90 backdrop-blur-sm text-primary'
@@ -425,22 +427,22 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
                     </span>
                   )}
 
-                  {/* Wishlist Button */}
+                  {/* Wishlist Button (min 36-44px touch target) */}
                   <button
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       onToggleWishlist(product);
                     }}
-                    className={`absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center transition-colors shadow-sm ${
+                    className={`absolute top-2 sm:top-3 right-2 sm:right-3 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center transition-colors shadow-sm active:scale-90 ${
                       isWish ? 'text-secondary bg-white' : 'text-[#1b1c1a] hover:text-secondary hover:bg-white'
                     }`}
                   >
-                    <span className="material-symbols-outlined text-[18px]">favorite</span>
+                    <span className="material-symbols-outlined text-[16px] sm:text-[18px]">favorite</span>
                   </button>
 
-                  {/* Quick Size Hover Drawer (Slides up on hover) */}
-                  <div className="absolute bottom-0 inset-x-0 p-3 bg-white/95 backdrop-blur-md translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-between border-t border-[#eae8e5]">
+                  {/* Quick Size Hover Drawer (Desktop) */}
+                  <div className="hidden md:flex absolute bottom-0 inset-x-0 p-3 bg-white/95 backdrop-blur-md translate-y-full group-hover:translate-y-0 transition-transform duration-300 items-center justify-between border-t border-[#eae8e5]">
                     <span className="font-label-xs text-[9px] text-[#444748] uppercase tracking-wider font-bold">
                       Quick Size:
                     </span>
@@ -461,32 +463,32 @@ export const ShopAllScreen: React.FC<ShopAllScreenProps> = ({
                 </div>
 
                 {/* Meta Bar */}
-                <div className="pt-3 flex flex-col gap-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-headline-sm text-sm leading-tight text-primary font-semibold truncate pr-2">
+                <div className="pt-2 sm:pt-3 flex flex-col gap-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <h3 className="font-headline-sm text-xs sm:text-sm leading-tight text-primary font-semibold line-clamp-1 pr-1">
                       {product.name}
                     </h3>
                     <button
                       type="button"
                       onClick={(e) => handleQuickAdd(product, product.sizes?.[0] || 'M', e)}
-                      className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs transition-colors shrink-0 font-semibold ${
+                      className={`flex items-center justify-center gap-0.5 sm:gap-1 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs transition-colors shrink-0 font-semibold self-start sm:self-auto min-h-[30px] sm:min-h-[32px] ${
                         isJustAdded
                           ? 'bg-primary text-white'
-                          : 'bg-[#eae8e5] hover:bg-primary hover:text-white text-on-surface'
+                          : 'bg-[#eae8e5] hover:bg-primary hover:text-white text-on-surface active:scale-95'
                       }`}
                     >
-                      <span className="material-symbols-outlined text-[14px]">
+                      <span className="material-symbols-outlined text-[13px] sm:text-[14px]">
                         {isJustAdded ? 'check' : 'add'}
                       </span>
                       <span>{isJustAdded ? 'Added' : 'Add'}</span>
                     </button>
                   </div>
-                  <div className="flex items-center gap-2 font-price-regular text-xs">
+                  <div className="flex items-center gap-2 font-price-regular text-[11px] sm:text-xs">
                     <span className={`font-bold ${product.isSale ? 'text-secondary' : 'text-primary'}`}>
                       Rs. {product.price.toLocaleString()}
                     </span>
                     {product.originalPrice && (
-                      <span className="text-outline line-through text-[11px]">
+                      <span className="text-outline line-through text-[10px] sm:text-[11px]">
                         Rs. {product.originalPrice.toLocaleString()}
                       </span>
                     )}

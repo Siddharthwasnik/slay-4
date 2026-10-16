@@ -129,7 +129,7 @@ export default function App() {
       />
 
       {/* Main View Container */}
-      <main className="flex-1 w-full pt-44">
+      <main className="flex-1 w-full pt-24 md:pt-44 pb-20 md:pb-8">
         {currentScreen === 'home' && (
           <HomeScreen
             onNavigateScreen={handleNavigateScreen}

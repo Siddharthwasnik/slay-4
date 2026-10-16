@@ -104,8 +104,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   return (
     <div className="flex flex-col w-full bg-[#fbf9f6]">
       {/* 1. GRAND CINEMATIC HERO SECTION */}
-      <section className="relative w-full overflow-hidden bg-black -mt-44 pt-44">
-        <div className="relative w-full h-[901px] min-h-[640px] flex items-center justify-center">
+      <section className="relative w-full overflow-hidden bg-black -mt-24 md:-mt-44 pt-24 md:pt-44">
+        <div className="relative w-full h-[70vh] sm:h-[80vh] md:h-[901px] min-h-[460px] md:min-h-[640px] flex items-center justify-center">
           {/* Background Lifestyle Photo */}
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-100 hover:scale-105"
@@ -117,29 +117,29 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
           {/* Hero Floating Elements */}
-          <div className="relative z-10 flex flex-col items-center justify-end h-full pb-16 px-6 text-center max-w-4xl mx-auto">
-            <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-white/20 backdrop-blur-md text-white font-label-md text-xs uppercase tracking-[0.25em] font-semibold border border-white/20">
+          <div className="relative z-10 flex flex-col items-center justify-end h-full pb-10 sm:pb-16 px-4 sm:px-6 text-center max-w-4xl mx-auto">
+            <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 mb-3 sm:mb-4 rounded-full bg-white/20 backdrop-blur-md text-white font-label-md text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-semibold border border-white/20">
               Festive Soiree 2024 / Capsule 01
             </span>
-            <h1 className="font-display-hero text-white tracking-tight uppercase mb-4 drop-shadow-md">
+            <h1 className="font-display-hero text-2xl sm:text-4xl md:text-6xl text-white tracking-tight uppercase mb-3 sm:mb-4 drop-shadow-md text-balance">
               Midnight Euphoria
             </h1>
-            <p className="font-body-lg text-base md:text-lg text-[#eae8e5] max-w-lg mb-8 opacity-90 leading-relaxed font-sans">
+            <p className="font-body-lg text-sm sm:text-base md:text-lg text-[#eae8e5] max-w-lg mb-6 sm:mb-8 opacity-90 leading-relaxed font-sans px-2">
               Modern silhouettes adorned with heritage block-prints, artisanal zari cords, and sun-spun chanderi silks.
             </p>
 
-            {/* CTA Pill */}
+            {/* CTA Pill (with 48px min height on touch) */}
             <button
               type="button"
               onClick={() => onNavigateScreen('shop-all', 'trending')}
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-black rounded-full font-label-lg text-xs uppercase tracking-widest shadow-2xl hover:bg-[#eae8e5] transition-all transform hover:-translate-y-0.5 font-bold"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 min-h-[48px] bg-white text-black rounded-full font-label-lg text-xs uppercase tracking-widest shadow-2xl hover:bg-[#eae8e5] active:scale-95 transition-all font-bold"
             >
               <span>Most Wanted</span>
               <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
             </button>
 
             {/* Pagination Dots */}
-            <div className="flex items-center gap-2 mt-8">
+            <div className="flex items-center gap-2 mt-6 sm:mt-8">
               <span className="w-2.5 h-2.5 rounded-full bg-white"></span>
               <span className="w-1.5 h-1.5 rounded-full bg-white/40"></span>
               <span className="w-1.5 h-1.5 rounded-full bg-white/40"></span>
