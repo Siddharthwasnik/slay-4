@@ -1,0 +1,6 @@
+{
+  "name": "Nishorama - Contemporary Ethnic & Festive Fusion",
+  "description": "Contemporary Indian ethnic-fusion ready-to-wear luxury e-commerce experience rooted in artisanal textiles, featuring the festive edit, curated lookbooks, and seamless checkout.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
