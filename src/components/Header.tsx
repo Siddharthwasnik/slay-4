@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface HeaderProps {
   currentScreen: 'home' | 'shop-all' | 'pdp' | 'bag';
@@ -19,6 +19,15 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSearch,
   onOpenWishlist,
 }) => {
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3000);
+  };
+
   const navItems = [
     { label: 'New In', path: 'new-in' },
     { label: 'Shop All', path: 'shop-all' },
@@ -32,6 +41,13 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#fbf9f6]/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-[#eae8e5]/60">
+      {/* Toast Notice */}
+      {toastMessage && (
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-50 bg-[#1b1c1a] text-white px-4 py-1.5 rounded-full text-xs font-label-md shadow-lg animate-fade-in flex items-center gap-2">
+          <span className="material-symbols-outlined text-[14px] text-secondary">info</span>
+          <span>{toastMessage}</span>
+        </div>
+      )}
       <div className="h-44 flex flex-col justify-between max-w-7xl mx-auto px-6 lg:px-12">
         {/* Top announcement & quick utilities */}
         <div className="h-8 flex items-center justify-between text-[#444748] font-label-xs text-[10px] uppercase tracking-widest pt-2">
@@ -46,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
                     navigator.share({ title: 'Slayvana', url: window.location.href }).catch(() => {});
                   } else {
                     navigator.clipboard.writeText(window.location.href);
-                    alert('Link copied to clipboard!');
+                    showToast('Link copied to clipboard!');
                   }
                 }}
                 className="hover:text-primary transition-colors flex items-center"
@@ -56,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
               <button
                 type="button"
-                onClick={() => alert('Shipping across India & International destinations')}
+                onClick={() => showToast('Shipping across India & International destinations')}
                 className="hover:text-primary transition-colors flex items-center"
                 title="Currency & Destination: INR (India)"
               >
@@ -90,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
 
               <button
                 type="button"
-                onClick={() => alert('Atelier Concierge: iamsiddharthwasnik@gmail.com')}
+                onClick={() => showToast('Atelier Concierge: iamsiddharthwasnik@gmail.com')}
                 className="text-[#1b1c1a] hover:text-secondary transition-colors flex items-center"
                 title="Account"
               >

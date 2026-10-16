@@ -7,6 +7,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onNavigateScreen }) => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [careNotice, setCareNotice] = useState<string | null>(null);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,31 +69,47 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateScreen }) => {
             </span>
             <ul className="space-y-2.5 font-body-sm text-sm text-[#444748]">
               <li>
-                <button type="button" onClick={() => alert('Easy 7-day doorstep pickup exchanges available across metro hubs.')} className="hover:text-primary transition-colors text-left">
+                <button type="button" onClick={() => setCareNotice('Easy 7-day doorstep pickup exchanges available across metro hubs.')} className="hover:text-primary transition-colors text-left">
                   Make a return / Exchange
                 </button>
               </li>
               <li>
-                <button type="button" onClick={() => alert('Refund & Exchange: 100% money back or instant store credit within 7 business days.')} className="hover:text-primary transition-colors text-left">
+                <button type="button" onClick={() => setCareNotice('Refund & Exchange: 100% money back or instant store credit within 7 business days.')} className="hover:text-primary transition-colors text-left">
                   Refund &amp; Exchange Policy
                 </button>
               </li>
               <li>
-                <button type="button" onClick={() => alert('Express Surface Air dispatched within 24-48 hours. Metro transit: 2-3 days.')} className="hover:text-primary transition-colors text-left">
+                <button type="button" onClick={() => setCareNotice('Express Surface Air dispatched within 24-48 hours. Metro transit: 2-3 days.')} className="hover:text-primary transition-colors text-left">
                   Shipping Policy
                 </button>
               </li>
               <li>
-                <button type="button" onClick={() => alert('Atelier FAQ: Pure mul fabrics are pre-shrunk and colorfast with gentle handwash.')} className="hover:text-primary transition-colors text-left">
+                <button type="button" onClick={() => setCareNotice('Atelier FAQ: Pure mul fabrics are pre-shrunk and colorfast with gentle handwash.')} className="hover:text-primary transition-colors text-left">
                   Frequently Asked Questions
                 </button>
               </li>
               <li>
-                <button type="button" onClick={() => alert('Terms & Conditions: Handcrafted items maintain natural unique weave variations.')} className="hover:text-primary transition-colors text-left">
+                <button type="button" onClick={() => setCareNotice('Terms & Conditions: Handcrafted items maintain natural unique weave variations.')} className="hover:text-primary transition-colors text-left">
                   Terms &amp; Conditions
                 </button>
               </li>
             </ul>
+
+            {careNotice && (
+              <div className="mt-4 p-3 rounded-lg bg-white border border-[#fe8357]/40 shadow-xs flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 text-xs text-primary">
+                  <span className="material-symbols-outlined text-[16px] text-secondary shrink-0 mt-0.5">help</span>
+                  <span>{careNotice}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setCareNotice(null)}
+                  className="text-[#444748] hover:text-primary shrink-0"
+                >
+                  <span className="material-symbols-outlined text-[14px]">close</span>
+                </button>
+              </div>
+            )}
           </div>
 
           {/* The Atelier */}
