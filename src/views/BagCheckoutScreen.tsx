@@ -8,6 +8,7 @@ interface BagCheckoutScreenProps {
   onMoveToWishlist: (item: CartItem) => void;
   onNavigateScreen: (screen: 'home' | 'shop-all' | 'pdp' | 'bag', category?: string) => void;
   onAddToCart: (product: Product, size?: string) => void;
+  onClearCart?: () => void;
 }
 
 export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
@@ -17,6 +18,7 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
   onMoveToWishlist,
   onNavigateScreen,
   onAddToCart,
+  onClearCart,
 }) => {
   // Promo code state
   const [promoCode, setPromoCode] = useState('FESTIVE20');
@@ -62,6 +64,13 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
   const freeShippingGoal = 1999;
   const progressPercent = Math.min(100, Math.round((subtotal / freeShippingGoal) * 100));
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
     if (promoCode.trim().toUpperCase() === 'FESTIVE20' || promoCode.trim().toUpperCase() === 'SLAY10' || promoCode.trim().toUpperCase() === 'SLAY20') {
@@ -76,6 +85,7 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
     const randomId = 'SLY-' + Math.floor(100000 + Math.random() * 900000);
     setPlacedOrderId(randomId);
     setOrderSuccess(true);
+    onClearCart?.();
   };
 
   const recommendedItems = PRODUCTS.filter((p) =>
@@ -84,30 +94,42 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
 
   return (
     <div className="flex flex-col w-full bg-[#fbf9f6] min-h-screen">
-      {/* Progress Header & Step Ribbon */}
+      {/* Progress Header & Step Ribbon with working anchor scroll */}
       <section className="w-full bg-[#f5f3f0]/70 py-3 sm:py-4 border-b border-[#eae8e5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3">
           <nav className="flex items-center gap-2 sm:gap-4 font-label-md text-[11px] sm:text-xs uppercase tracking-wider text-[#444748] overflow-x-auto no-scrollbar w-full sm:w-auto py-0.5">
-            <span className="flex items-center gap-1.5 text-primary font-bold shrink-0">
+            <button
+              type="button"
+              onClick={() => scrollToSection('bag-items-section')}
+              className="flex items-center gap-1.5 text-primary font-bold shrink-0 hover:opacity-80 transition-opacity"
+            >
               <span className="w-5 h-5 rounded-full bg-primary text-white flex items-center justify-center text-[10px]">
                 01
               </span>
-              Shopping Bag
-            </span>
+              <span>Shopping Bag</span>
+            </button>
             <span className="text-outline-variant shrink-0">/</span>
-            <span className="flex items-center gap-1.5 text-[#444748] hover:text-primary transition-colors cursor-pointer shrink-0">
+            <button
+              type="button"
+              onClick={() => scrollToSection('address-section')}
+              className="flex items-center gap-1.5 text-[#444748] hover:text-primary transition-colors cursor-pointer shrink-0"
+            >
               <span className="w-5 h-5 rounded-full bg-[#eae8e5] text-on-surface-variant flex items-center justify-center text-[10px]">
                 02
               </span>
-              Address
-            </span>
+              <span>Address</span>
+            </button>
             <span className="text-outline-variant shrink-0">/</span>
-            <span className="flex items-center gap-1.5 text-[#444748] hover:text-primary transition-colors cursor-pointer shrink-0">
+            <button
+              type="button"
+              onClick={() => scrollToSection('payment-section')}
+              className="flex items-center gap-1.5 text-[#444748] hover:text-primary transition-colors cursor-pointer shrink-0"
+            >
               <span className="w-5 h-5 rounded-full bg-[#eae8e5] text-on-surface-variant flex items-center justify-center text-[10px]">
                 03
               </span>
-              Payment
-            </span>
+              <span>Payment</span>
+            </button>
           </nav>
           <div className="hidden sm:flex items-center gap-1.5 text-[#444748] font-label-xs text-[10px] tracking-widest uppercase font-bold">
             <span className="material-symbols-outlined text-secondary text-[16px]">verified</span>
@@ -166,7 +188,7 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
             {/* Left Column: Bag Items & Integrated Shipping Details (7 cols) */}
             <div className="lg:col-span-7 xl:col-span-8 flex flex-col gap-8">
               {/* Bag Items Module */}
-              <div className="bg-white rounded-xl p-5 md:p-8 shadow-sm border border-[#eae8e5]">
+              <div id="bag-items-section" className="bg-white rounded-xl p-5 md:p-8 shadow-sm border border-[#eae8e5]">
                 <div className="flex items-baseline justify-between pb-4 border-b border-[#eae8e5]">
                   <div className="flex items-center gap-2">
                     <h1 className="font-headline-md text-2xl text-primary font-serif">Your Bag</h1>
@@ -313,7 +335,7 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
               </div>
 
               {/* Express Customer Details & Address Form (Step 02 of 03) */}
-              <div className="bg-white rounded-xl p-5 md:p-8 shadow-sm border border-[#eae8e5]">
+              <div id="address-section" className="bg-white rounded-xl p-5 md:p-8 shadow-sm border border-[#eae8e5]">
                 <div className="flex items-center justify-between pb-4 border-b border-[#eae8e5]">
                   <div>
                     <span className="text-[10px] font-label-xs uppercase tracking-widest text-secondary font-bold">
@@ -470,7 +492,7 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
               </div>
 
               {/* Payment Options Module (Step 03 of 03) */}
-              <div className="bg-white rounded-xl p-5 md:p-8 shadow-sm border border-[#eae8e5]">
+              <div id="payment-section" className="bg-white rounded-xl p-5 md:p-8 shadow-sm border border-[#eae8e5]">
                 <div className="flex items-center justify-between pb-4 border-b border-[#eae8e5]">
                   <div>
                     <span className="text-[10px] font-label-xs uppercase tracking-widest text-secondary font-bold">
@@ -915,7 +937,7 @@ export const BagCheckoutScreen: React.FC<BagCheckoutScreenProps> = ({
 
       {/* Sticky Mobile Checkout Bar (Thumb Zone) */}
       {cart.length > 0 && !orderSuccess && (
-        <aside aria-label="Mobile Checkout Action" className="lg:hidden fixed bottom-16 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#eae8e5] p-3 px-4 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
+        <aside aria-label="Mobile Checkout Action" className="md:hidden fixed bottom-16 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#eae8e5] p-3 px-4 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
           <div>
             <span className="text-[10px] text-[#444748] uppercase tracking-wider block font-bold">Total Payable</span>
             <span className="font-headline-sm text-base font-bold text-primary">

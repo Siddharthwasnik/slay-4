@@ -19,22 +19,46 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
   isWishlisted,
   onSelectProduct,
 }) => {
-  // Chaahvi Set fallback images from HTML
-  const galleryImages = product?.gallery && product.gallery.length > 0
-    ? product.gallery
+  const currentItem: Product = product || PRODUCTS[0];
+
+  // Dynamic gallery based on selected item
+  const galleryImages = currentItem.gallery && currentItem.gallery.length > 0
+    ? currentItem.gallery
+    : [currentItem.image];
+
+  const availableColors = currentItem.colors && currentItem.colors.length > 0
+    ? currentItem.colors
     : [
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuAPtCnQrB8tzR8vSSVKhZlUginp9vMh_FiMKPsa1YF5rvfz4v9Xp83M3fkGlPZCOC5xzP4eau84PGA1YDLN2_rnNFIIU3HiqJWAUGuaR1nSq6naBueg5AM73wdIwZXlKkZ3z_kHFTRIYDUnl1ev3lIakh0jj3m8O4KuSmR0kQHkNNYY0Ge7MYa7eTIjYDD4jX1Z0pLRLCLt3hzzt0A4mcgDzJQPByEdE_CaxMy7yGR6gIom11JODE6m',
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuCC6s0ndcvcXbCB9wZ8JfP3iFmYt6J_GUTz0LIrMEaellGD_8ZjuyVW9PtyTTnSqyEPT-XoDU98qX_Yd6EF0CLyg322DVpPVakQu22ijkQWMIX_gc9CzWP2YClnJWUYAU5MZjQbHqptu9ulIOTnIXGWoqP9C2hKjza01DVOvUuLS9PKwG87JjQZwWbRk_OkZCrTL8tPJkTEp7iw51BbTBmnxv5gSQ-nCpMqVWUc3s7ScWJ_hpCsNfny',
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuC8bhUAi3NuyPvV0HYIrdFEZ2BWMO1gN9IpBKCZ6Cx4UYYOq_5iwSzdth8_3fTMRhXTDk4VPIoSVKY1bj1X-dth6RgHOtSjd3gA1ve-ovEvaXxpSLGsJ3A7B628OhxOrHOn0GUIW1ff5fmY-MT6Xsaet0fVK1yeffhjtocadVWXe9bVR0rE83tuKhlmyraRaGVE619WuBFMDptnQLrEYvgE9X4me_wLCXAdICtlDiLB4n83tp1ZTe3d',
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuBuQoJT_KPaaC_Ek0slR9mK6UHIngV6VrrYVw691i9skrbMkL7VtiR0gE8CBmXXAiwJVrwHxuyVkolPLfh8dVNML-Kz-fyxvHxXcNpjAxd8l35g_zlZu1G5P93wXK0of1-WF_o4iI9cHpA4HXWxKUyMj6_-HLdxTO_clEMgvhjU0cpeJ-nyyRupZcgN7TdueMwVKF0UX7lWvP-oyNkeYUVwJPflctYhk6-EQDedsc8aCk4uE045HwPq',
+        { name: 'Warm Sandstone', hex: '#f4ecd8' },
+        { name: 'Rust Terracotta', hex: '#a23e18' },
+        { name: 'Mughal Ivory', hex: '#ffffff' }
       ];
 
+  const availableSizes = currentItem.sizes && currentItem.sizes.length > 0
+    ? currentItem.sizes
+    : ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [selectedColor, setSelectedColor] = useState('Warm Sandstone');
-  const [selectedSize, setSelectedSize] = useState('M');
+  const [selectedColor, setSelectedColor] = useState(availableColors[0].name);
+  const [selectedSize, setSelectedSize] = useState(availableSizes[0] || 'M');
   const [sizeModalOpen, setSizeModalOpen] = useState(false);
   const [addedToast, setAddedToast] = useState(false);
   const [copyToast, setCopyToast] = useState(false);
+
+  // Reset variant selections when selected product changes
+  useEffect(() => {
+    setActiveImageIndex(0);
+    if (currentItem.colors && currentItem.colors.length > 0) {
+      setSelectedColor(currentItem.colors[0].name);
+    } else {
+      setSelectedColor('Warm Sandstone');
+    }
+    if (currentItem.sizes && currentItem.sizes.length > 0) {
+      setSelectedSize(currentItem.sizes[0]);
+    } else {
+      setSelectedSize('M');
+    }
+  }, [currentItem.id]);
 
   // Accordion toggles
   const [accordionOpen, setAccordionOpen] = useState<{ [key: string]: boolean }>({
@@ -62,19 +86,6 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
 
   const toggleAccordion = (id: string) => {
     setAccordionOpen((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  const currentItem: Product = product || {
-    id: 'chaahvi-corset-set',
-    name: 'Chaahvi Corset Kurti & Flared Pant Set',
-    sku: 'SLY-SLY-24-CHS',
-    price: 2499,
-    originalPrice: 3299,
-    discountBadge: '24% Off',
-    category: 'Sets',
-    badge: 'New In',
-    image: galleryImages[0],
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
   };
 
   const handleAdd = () => {
@@ -308,13 +319,13 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
                 </button>
               </div>
 
-              <div className="grid grid-cols-6 gap-2">
+              <div className="grid grid-cols-6 gap-1.5 sm:gap-2">
                 {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((sz) => (
                   <button
                     key={sz}
                     type="button"
                     onClick={() => setSelectedSize(sz)}
-                    className={`py-3 rounded-lg font-label-md text-xs uppercase text-center transition-all ${
+                    className={`py-2.5 sm:py-3 px-0.5 rounded-lg font-label-md text-[11px] sm:text-xs uppercase text-center transition-all ${
                       selectedSize === sz
                         ? 'bg-primary text-white font-bold shadow-sm'
                         : 'bg-[#f5f3f0] text-on-surface hover:bg-[#eae8e5]'
@@ -626,36 +637,36 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-16 h-16 rounded-xl bg-white shadow-sm flex flex-col items-center justify-center border border-[#eae8e5]">
-              <span className="font-price-sale text-xl text-primary font-bold">
+          <div className="flex items-center gap-1.5 sm:gap-3">
+            <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-xl bg-white shadow-sm flex flex-col items-center justify-center border border-[#eae8e5]">
+              <span className="font-price-sale text-base sm:text-xl text-primary font-bold">
                 {cdDays < 10 ? `0${cdDays}` : cdDays}
               </span>
-              <span className="font-label-xs text-[10px] uppercase text-outline font-semibold">Days</span>
+              <span className="font-label-xs text-[9px] sm:text-[10px] uppercase text-outline font-semibold">Days</span>
             </div>
-            <span className="text-primary font-bold text-xl">:</span>
+            <span className="text-primary font-bold text-base sm:text-xl">:</span>
 
-            <div className="w-16 h-16 rounded-xl bg-white shadow-sm flex flex-col items-center justify-center border border-[#eae8e5]">
-              <span className="font-price-sale text-xl text-primary font-bold">
+            <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-xl bg-white shadow-sm flex flex-col items-center justify-center border border-[#eae8e5]">
+              <span className="font-price-sale text-base sm:text-xl text-primary font-bold">
                 {cdHours < 10 ? `0${cdHours}` : cdHours}
               </span>
-              <span className="font-label-xs text-[10px] uppercase text-outline font-semibold">Hours</span>
+              <span className="font-label-xs text-[9px] sm:text-[10px] uppercase text-outline font-semibold">Hours</span>
             </div>
-            <span className="text-primary font-bold text-xl">:</span>
+            <span className="text-primary font-bold text-base sm:text-xl">:</span>
 
-            <div className="w-16 h-16 rounded-xl bg-white shadow-sm flex flex-col items-center justify-center border border-[#eae8e5]">
-              <span className="font-price-sale text-xl text-primary font-bold">
+            <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-xl bg-white shadow-sm flex flex-col items-center justify-center border border-[#eae8e5]">
+              <span className="font-price-sale text-base sm:text-xl text-primary font-bold">
                 {cdMins < 10 ? `0${cdMins}` : cdMins}
               </span>
-              <span className="font-label-xs text-[10px] uppercase text-outline font-semibold">Mins</span>
+              <span className="font-label-xs text-[9px] sm:text-[10px] uppercase text-outline font-semibold">Mins</span>
             </div>
-            <span className="text-primary font-bold text-xl">:</span>
+            <span className="text-primary font-bold text-base sm:text-xl">:</span>
 
-            <div className="w-16 h-16 rounded-xl bg-white shadow-sm flex flex-col items-center justify-center border border-[#eae8e5]">
-              <span className="font-price-sale text-xl text-secondary font-bold">
+            <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-xl bg-white shadow-sm flex flex-col items-center justify-center border border-[#eae8e5]">
+              <span className="font-price-sale text-base sm:text-xl text-secondary font-bold">
                 {cdSecs < 10 ? `0${cdSecs}` : cdSecs}
               </span>
-              <span className="font-label-xs text-[10px] uppercase text-outline font-semibold">Secs</span>
+              <span className="font-label-xs text-[9px] sm:text-[10px] uppercase text-outline font-semibold">Secs</span>
             </div>
           </div>
         </div>
@@ -669,7 +680,7 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
       />
 
       {/* Sticky Mobile Bottom Purchase Bar (Thumb Zone) */}
-      <aside aria-label="Quick Add to Bag" className="lg:hidden fixed bottom-16 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#eae8e5] p-3 px-4 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
+      <aside aria-label="Quick Add to Bag" className="md:hidden fixed bottom-16 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#eae8e5] p-3 px-4 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-1.5">
             <span className="font-headline-sm text-sm font-bold text-primary">

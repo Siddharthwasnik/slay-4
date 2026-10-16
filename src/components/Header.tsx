@@ -96,14 +96,14 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* MAIN HEADER CONTAINER: Compact 56px on mobile, spacious on desktop */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-12">
         <div className="h-14 md:h-20 flex items-center justify-between">
           {/* Mobile Quick Action / Search */}
-          <div className="flex md:hidden items-center gap-1">
+          <div className="flex md:hidden items-center">
             <button
               type="button"
               onClick={onOpenSearch}
-              className="w-11 h-11 flex items-center justify-center text-[#1b1c1a] hover:text-secondary transition-colors rounded-full active:bg-[#eae8e5]"
+              className="w-10 h-10 min-w-[40px] flex items-center justify-center text-[#1b1c1a] hover:text-secondary transition-colors rounded-full active:bg-[#eae8e5]"
               title="Search garments"
               aria-label="Search garments"
             >
@@ -112,18 +112,18 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Central Monogram / Masthead */}
-          <div className="flex-1 md:flex-none flex items-center justify-center md:justify-start">
+          <div className="flex-1 md:flex-none flex items-center justify-center md:justify-start px-1">
             <button
               type="button"
               onClick={() => onNavigateScreen('home')}
-              className="font-headline-lg text-2xl sm:text-[28px] md:text-[36px] tracking-[0.25em] text-primary uppercase select-none hover:opacity-90 transition-opacity focus:outline-none"
+              className="font-headline-lg text-xl sm:text-[28px] md:text-[36px] tracking-[0.16em] sm:tracking-[0.25em] text-primary uppercase select-none hover:opacity-90 transition-opacity focus:outline-none whitespace-nowrap"
             >
               SLAYVANA
             </button>
           </div>
 
           {/* Right Action Icons (with 44px touch targets on mobile) */}
-          <div className="flex items-center gap-1 sm:gap-2">
+          <div className="flex items-center gap-0.5 sm:gap-2">
             <button
               type="button"
               onClick={onOpenSearch}

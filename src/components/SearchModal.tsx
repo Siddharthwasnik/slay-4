@@ -26,27 +26,28 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     : PRODUCTS.slice(0, 6);
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-start justify-center pt-20 px-4">
+    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-start justify-center pt-14 sm:pt-20 px-3 sm:px-4">
       <div 
-        className="bg-[#fbf9f6] rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative space-y-4 border border-[#eae8e5]"
+        className="bg-[#fbf9f6] rounded-2xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl relative space-y-4 border border-[#eae8e5]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
-          <div className="flex items-center gap-3 w-full">
-            <span className="material-symbols-outlined text-[24px] text-[#444748]">search</span>
+          <div className="flex items-center gap-2 sm:gap-3 w-full">
+            <span className="material-symbols-outlined text-[22px] sm:text-[24px] text-[#444748]">search</span>
             <input
               type="text"
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search kurtis, corset tops, co-ords, linen pants..."
-              className="w-full bg-transparent text-lg text-primary outline-none placeholder:text-outline font-sans"
+              placeholder="Search kurtis, corset tops, co-ords..."
+              className="w-full bg-transparent text-base sm:text-lg text-primary outline-none placeholder:text-outline font-sans"
             />
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#eae8e5] flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all ml-2"
+            className="w-9 h-9 min-w-[36px] rounded-full bg-[#eae8e5] flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all ml-1.5"
+            aria-label="Close search"
           >
             <span className="material-symbols-outlined text-[18px]">close</span>
           </button>

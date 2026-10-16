@@ -170,3 +170,8 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #c4c7c7;
 }
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}

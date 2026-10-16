@@ -19,26 +19,55 @@ export default function App() {
     PRODUCTS.find((p) => p.id === 'chaahvi-corset-set') || PRODUCTS[0]
   );
 
-  // Initial Cart matching Screen 3 exactly (Chaahvi Set + Diya Halter Neck Top)
-  const [cart, setCart] = useState<CartItem[]>([
-    {
-      product: PRODUCTS.find((p) => p.id === 'chaahvi-corset-set') || PRODUCTS[0],
-      size: 'M (38)',
-      color: 'Raw Ivory',
-      quantity: 1,
-    },
-    {
-      product: PRODUCTS.find((p) => p.id === 'diya-halter-top') || PRODUCTS[2],
-      size: 'S (36)',
-      color: 'Vermillion Rust',
-      quantity: 1,
-    },
-  ]);
+  // Initial Cart with localStorage persistence
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('slayvana_cart');
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return [
+      {
+        product: PRODUCTS.find((p) => p.id === 'chaahvi-corset-set') || PRODUCTS[0],
+        size: 'M (38)',
+        color: 'Raw Ivory',
+        quantity: 1,
+      },
+      {
+        product: PRODUCTS.find((p) => p.id === 'diya-halter-top') || PRODUCTS[2],
+        size: 'S (36)',
+        color: 'Vermillion Rust',
+        quantity: 1,
+      },
+    ];
+  });
 
-  // Wishlist state
-  const [wishlist, setWishlist] = useState<Product[]>([
-    PRODUCTS.find((p) => p.id === 'chunar-bralette') || PRODUCTS[1],
-  ]);
+  // Wishlist state with localStorage persistence
+  const [wishlist, setWishlist] = useState<Product[]>(() => {
+    try {
+      const saved = localStorage.getItem('slayvana_wishlist');
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return [
+      PRODUCTS.find((p) => p.id === 'chunar-bralette') || PRODUCTS[1],
+    ];
+  });
+
+  // Persist cart & wishlist to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('slayvana_cart', JSON.stringify(cart));
+    } catch {}
+  }, [cart]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('slayvana_wishlist', JSON.stringify(wishlist));
+    } catch {}
+  }, [wishlist]);
+
+  const handleClearCart = () => {
+    setCart([]);
+  };
 
   // Modals state
   const [searchOpen, setSearchOpen] = useState(false);
@@ -129,7 +158,7 @@ export default function App() {
       />
 
       {/* Main View Container */}
-      <main className="flex-1 w-full pt-24 md:pt-44 pb-20 md:pb-8">
+      <main className="flex-1 w-full pt-24 md:pt-44 pb-32 md:pb-12">
         {currentScreen === 'home' && (
           <HomeScreen
             onNavigateScreen={handleNavigateScreen}
@@ -170,6 +199,7 @@ export default function App() {
             onMoveToWishlist={handleMoveToWishlist}
             onNavigateScreen={handleNavigateScreen}
             onAddToCart={handleAddToCart}
+            onClearCart={handleClearCart}
           />
         )}
       </main>

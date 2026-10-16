@@ -404,8 +404,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </section>
 
       {/* 6. FULL-BLEED ARCHITECTURAL / DESERT CAMPAIGN BANNER */}
-      <section className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-12">
-        <div className="relative w-full h-[520px] rounded-2xl overflow-hidden shadow-lg flex items-center justify-center">
+      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
+        <div className="relative w-full h-[320px] sm:h-[420px] md:h-[520px] rounded-2xl overflow-hidden shadow-lg flex items-center justify-center">
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-100 hover:scale-102"
             style={{
@@ -553,50 +553,50 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           </div>
 
           {/* Live Dynamic Countdown Blocks */}
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4">
             <div className="flex flex-col items-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-[#f5f3f0] flex items-center justify-center shadow-inner border border-[#eae8e5]">
-                <span className="font-headline-lg text-2xl sm:text-3xl text-primary font-bold">
+              <div className="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-[#f5f3f0] flex items-center justify-center shadow-inner border border-[#eae8e5]">
+                <span className="font-headline-lg text-lg sm:text-2xl md:text-3xl text-primary font-bold">
                   {days < 10 ? `0${days}` : days}
                 </span>
               </div>
-              <span className="font-label-xs text-[10px] uppercase tracking-wider text-[#444748] mt-1.5 font-bold">
+              <span className="font-label-xs text-[9px] sm:text-[10px] uppercase tracking-wider text-[#444748] mt-1 sm:mt-1.5 font-bold">
                 Days
               </span>
             </div>
-            <span className="font-headline-md text-xl text-[#444748] -mt-5 font-bold">:</span>
+            <span className="font-headline-md text-base sm:text-xl text-[#444748] -mt-4 sm:-mt-5 font-bold">:</span>
 
             <div className="flex flex-col items-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-[#f5f3f0] flex items-center justify-center shadow-inner border border-[#eae8e5]">
-                <span className="font-headline-lg text-2xl sm:text-3xl text-primary font-bold">
+              <div className="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-[#f5f3f0] flex items-center justify-center shadow-inner border border-[#eae8e5]">
+                <span className="font-headline-lg text-lg sm:text-2xl md:text-3xl text-primary font-bold">
                   {hours < 10 ? `0${hours}` : hours}
                 </span>
               </div>
-              <span className="font-label-xs text-[10px] uppercase tracking-wider text-[#444748] mt-1.5 font-bold">
+              <span className="font-label-xs text-[9px] sm:text-[10px] uppercase tracking-wider text-[#444748] mt-1 sm:mt-1.5 font-bold">
                 Hours
               </span>
             </div>
-            <span className="font-headline-md text-xl text-[#444748] -mt-5 font-bold">:</span>
+            <span className="font-headline-md text-base sm:text-xl text-[#444748] -mt-4 sm:-mt-5 font-bold">:</span>
 
             <div className="flex flex-col items-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-[#f5f3f0] flex items-center justify-center shadow-inner border border-[#eae8e5]">
-                <span className="font-headline-lg text-2xl sm:text-3xl text-primary font-bold">
+              <div className="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-[#f5f3f0] flex items-center justify-center shadow-inner border border-[#eae8e5]">
+                <span className="font-headline-lg text-lg sm:text-2xl md:text-3xl text-primary font-bold">
                   {mins < 10 ? `0${mins}` : mins}
                 </span>
               </div>
-              <span className="font-label-xs text-[10px] uppercase tracking-wider text-[#444748] mt-1.5 font-bold">
+              <span className="font-label-xs text-[9px] sm:text-[10px] uppercase tracking-wider text-[#444748] mt-1 sm:mt-1.5 font-bold">
                 Minutes
               </span>
             </div>
-            <span className="font-headline-md text-xl text-[#444748] -mt-5 font-bold">:</span>
+            <span className="font-headline-md text-base sm:text-xl text-[#444748] -mt-4 sm:-mt-5 font-bold">:</span>
 
             <div className="flex flex-col items-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-[#f5f3f0] flex items-center justify-center shadow-inner border border-[#eae8e5]">
-                <span className="font-headline-lg text-2xl sm:text-3xl text-secondary font-bold">
+              <div className="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-[#f5f3f0] flex items-center justify-center shadow-inner border border-[#eae8e5]">
+                <span className="font-headline-lg text-lg sm:text-2xl md:text-3xl text-secondary font-bold">
                   {secs < 10 ? `0${secs}` : secs}
                 </span>
               </div>
-              <span className="font-label-xs text-[10px] uppercase tracking-wider text-[#444748] mt-1.5 font-bold">
+              <span className="font-label-xs text-[9px] sm:text-[10px] uppercase tracking-wider text-[#444748] mt-1 sm:mt-1.5 font-bold">
                 Seconds
               </span>
             </div>
@@ -667,8 +667,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </section>
 
       {/* 10. ARTISAN WOODBLOCK CRAFTSMANSHIP BANNER */}
-      <section className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-12">
-        <div className="relative w-full rounded-2xl overflow-hidden bg-[#eae8e5] p-6 lg:p-12 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8 border border-[#c4c7c7]/40">
+      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
+        <div className="relative w-full rounded-2xl overflow-hidden bg-[#eae8e5] p-5 sm:p-8 lg:p-12 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 border border-[#c4c7c7]/40">
           <div className="max-w-xl space-y-4">
             <span className="font-label-xs text-xs uppercase tracking-[0.2em] text-secondary font-bold">
               Artisanal Lineage
@@ -679,21 +679,21 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             <p className="font-body-md text-sm text-[#444748] leading-relaxed">
               Every single motif across our collections begins as a hand-chiseled teak wood block in the artisan villages of Sanganer and Bagru. Hand-stamped onto airy mulmuls and raw silks with natural non-toxic plant pigments.
             </p>
-            <div className="flex items-center gap-6 pt-2">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2">
               <div>
                 <span className="block font-headline-md text-2xl text-primary font-bold">100%</span>
                 <span className="font-label-xs text-[10px] text-[#444748] uppercase tracking-wider font-semibold">
                   Natural Pigments
                 </span>
               </div>
-              <div className="w-px h-10 bg-[#c4c7c7]"></div>
+              <div className="w-px h-8 sm:h-10 bg-[#c4c7c7]"></div>
               <div>
                 <span className="block font-headline-md text-2xl text-primary font-bold">48+</span>
                 <span className="font-label-xs text-[10px] text-[#444748] uppercase tracking-wider font-semibold">
                   Artisan Families
                 </span>
               </div>
-              <div className="w-px h-10 bg-[#c4c7c7]"></div>
+              <div className="w-px h-8 sm:h-10 bg-[#c4c7c7]"></div>
               <div>
                 <span className="block font-headline-md text-2xl text-primary font-bold">Zero</span>
                 <span className="font-label-xs text-[10px] text-[#444748] uppercase tracking-wider font-semibold">

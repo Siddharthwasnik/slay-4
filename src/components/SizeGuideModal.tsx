@@ -24,7 +24,7 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({
   return (
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 transition-all">
       <div 
-        className="bg-[#fbf9f6] rounded-2xl max-w-xl w-full p-6 lg:p-8 shadow-2xl relative space-y-6 border border-[#eae8e5]"
+        className="bg-[#fbf9f6] rounded-2xl max-w-xl w-full p-4 sm:p-6 lg:p-8 shadow-2xl relative space-y-4 sm:space-y-6 border border-[#eae8e5] max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between pb-2 border-b border-[#eae8e5]">

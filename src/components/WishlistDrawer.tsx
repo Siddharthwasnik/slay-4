@@ -23,32 +23,33 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
   return (
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex justify-end">
       <div 
-        className="bg-[#fbf9f6] w-full max-w-md h-full p-6 shadow-2xl flex flex-col justify-between border-l border-[#eae8e5] animate-in slide-in-from-right duration-300"
+        className="bg-[#fbf9f6] w-full max-w-md h-full p-4 sm:p-6 shadow-2xl flex flex-col justify-between border-l border-[#eae8e5] animate-in slide-in-from-right duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         <div>
-          <div className="flex items-center justify-between pb-4 border-b border-[#eae8e5]">
+          <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#eae8e5]">
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-secondary text-[22px]">favorite</span>
-              <h3 className="font-headline-md text-xl text-primary font-serif">
+              <h3 className="font-headline-md text-lg sm:text-xl text-primary font-serif">
                 Your Wishlist ({wishlist.length})
               </h3>
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-[#eae8e5] flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all"
+              className="w-9 h-9 min-w-[36px] rounded-full bg-[#eae8e5] flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all"
+              aria-label="Close wishlist"
             >
               <span className="material-symbols-outlined text-[18px]">close</span>
             </button>
           </div>
 
-          <div className="mt-4 max-h-[calc(100vh-200px)] overflow-y-auto space-y-4 pr-1">
+          <div className="mt-4 max-h-[calc(100vh-200px)] overflow-y-auto space-y-3 sm:space-y-4 pr-1">
             {wishlist.length > 0 ? (
               wishlist.map((product) => (
                 <div
                   key={product.id}
-                  className="flex gap-4 p-3 rounded-xl bg-white border border-[#eae8e5] shadow-sm relative group"
+                  className="flex gap-3 sm:gap-4 p-3 rounded-xl bg-white border border-[#eae8e5] shadow-sm relative group"
                 >
                   <img
                     src={product.image}
@@ -57,7 +58,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                       onSelectProduct(product);
                       onClose();
                     }}
-                    className="w-20 h-26 object-cover rounded-lg bg-[#eae8e5] cursor-pointer hover:opacity-90"
+                    className="w-18 h-24 sm:w-20 sm:h-26 object-cover rounded-lg bg-[#eae8e5] cursor-pointer hover:opacity-90 shrink-0"
                   />
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
